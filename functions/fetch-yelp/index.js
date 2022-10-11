@@ -5,9 +5,10 @@ const handler = async (event) => {
   // add code here to fetch data from yelp API
   // be sure to include the parameters from event.queryStringParameters
   const zip = event.queryStringParameters.zip;
+  const term = event.queryStringParameters.term;
   try {
     const response = await fetch(
-      `https://api.yelp.com/v3/businesses/search?categories=restaurants&location=${zip}`,
+      `https://api.yelp.com/v3/businesses/search?categories=restaurants&location=${zip}&term=${term}`,
       {
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`,
@@ -15,7 +16,7 @@ const handler = async (event) => {
       }
     );
     const data = await response.json();
-    console.log(data);
+
     return {
       statusCode: 200,
       body: JSON.stringify(data.businesses),

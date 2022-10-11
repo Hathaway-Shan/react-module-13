@@ -9,7 +9,7 @@ function App() {
 
   // TODO -- add state for zip / search and add event listeners to the inputs
   const [zip, setZip] = useState('97206');
-  const [search, setSearch] = useState('pizza');
+  const [term, setTerm] = useState('pizza');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,10 +23,8 @@ function App() {
   // TODO -- add event for button click to handle calling fetchBusinesses with zip / search
 
   const searchItems = async () => {
-    const data = await fetchBusinesses(zip, search);
-
+    const data = await fetchBusinesses(zip, term);
     setBusinesses(data);
-    console.log('searchItems data is: ', data);
   };
 
   return (
@@ -39,7 +37,7 @@ function App() {
         </div>
         <div className="form-control">
           <label>Query:</label>
-          <input type="text" placeholder="Search..." onChange={(e) => setSearch(e.target.value)} />
+          <input type="text" placeholder="Search..." onChange={(e) => setTerm(e.target.value)} />
         </div>
         <button onClick={searchItems}>Search</button>
       </div>
